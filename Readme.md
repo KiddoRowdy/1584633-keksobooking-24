@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Olga Buianova](https://up.htmlacademy.ru/javascript/24/user/1584633).
-* Наставник: `Неизвестно`.
+* Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
