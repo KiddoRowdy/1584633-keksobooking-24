@@ -1,14 +1,3 @@
-function getRandomNumber(from, to, numberOfSigns) {
-  if ( from < 0 || to <= from) {
-    throw new Error('Некорректный диапазон чисел');
-  }
-  const calculation = (Math.random() * (to - from) + from).toFixed(numberOfSigns);
-
-  return Number(calculation);
-}
-
-getRandomNumber(10, 100.89, 3);
-
 const AVATAR_NUMBER = [
   '01',
   '02',
@@ -77,42 +66,72 @@ const DESCRIPTIONS = [
   'На это кровати спал сам Фредди Меркури',
 ];
 
+const PHOTOS_PATH = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/';
+
 const PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+  'duonguyen-8LrGtIxxa4w.jpg',
+  'brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'claire-rendall-b6kAwr1i0Iw.jpg',
 ];
+
 
 const ADVERTISMENT_COUNT = 3;
 
-const getRandomPositiveInteger = (from, to) => {
-  const lower = Math.ceil(Math.min(Math.abs(from), Math.abs(to)));
-  const upper = Math.floor(Math.max(Math.abs(from), Math.abs(to)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
+const FEATURES_FROM = 1;
+
+const FEATURES_TO = 6;
+
+const PHOTOS_FROM = 1;
+
+const PHOTOS_TO = 3;
+
+const LOCATION_LAT_FROM = 35.65000;
+
+const LOCATION_LAT_TO = 35.70000;
+
+const LOCATION_LNG_FROM = 139.70000;
+
+const LOCATION_LNG_TO = 139.80000;
+
+const PRICE_FROM = 0;
+
+const PRICE_TO = 100000;
+
+const ROOMS_FROM = 0;
+
+const ROOMS_TO = 100;
+
+const GUESTS_FROM = 0;
+
+const GUESTS_TO = 100;
+
+const getRandomNumber = (from, to, numberOfSigns) => {
+  if ( from < 0 || to <= from) {
+    throw new Error('Некорректный диапазон чисел');
+  }
+  const calculation = (Math.random() * (to - from) + from).toFixed(numberOfSigns);
+
+  return Number(calculation);
 };
 
-const getRandomPositiveFloat = (from, to, numberOfSigns = 1) => {
-  const lower = Math.min(Math.abs(from), Math.abs(to));
-  const upper = Math.max(Math.abs(from), Math.abs(to));
-  const result = Math.random() * (upper - lower) + lower;
-  return result.toFixed(numberOfSigns);
-};
+function getString(someString) {
 
-const getRandomArrayElement = (elements) =>
-  elements[_.random(0, elements.length - 1)];
+  return `${PHOTOS_PATH}${someString}`;
+}
 
 const getArrayRandomLengthUnique = (elements, arrayLength) => {
   let index = 0;
   let dellElements = elements.slice();
   const newElements = [];
+
   do {
-    const newElement = (dellElements[_.random(0, dellElements.length - 1)]);
+    const newElement = (dellElements[getRandomNumber]);
     newElements.push(newElement);
     const indexElements = dellElements.indexOf(newElement);
     dellElements.splice(indexElements, 1);
     index++;
   } while (index < arrayLength);
+
   return dellElements = newElements;
 };
 
@@ -120,36 +139,39 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
   let index = 0;
   let dellElements = elements.slice();
   const newElements = [];
+
   do {
-    const newElement = (dellElements[_.random(0, dellElements.length - 1)]);
+    const newElement = (dellElements[getRandomNumber]);
     newElements.push(newElement);
     index++;
   } while (index < arrayLength);
+
   return dellElements = newElements;
 };
 
 
 const createAdvertisement = () => {
-  const featuresLength = getRandomPositiveInteger(1, 6);
-  const photosLength = getRandomPositiveInteger(1, 3);
-  const locationLat = getRandomPositiveFloat(35.65000, 35.70000, 5);
-  const locationLng = getRandomPositiveFloat(139.70000, 139.80000, 5);
+  const featuresLength = getRandomNumber(FEATURES_FROM, FEATURES_TO, 0);
+  const photosLength = getRandomNumber(PHOTOS_FROM, PHOTOS_TO, 0);
+  const locationLat = getRandomNumber(LOCATION_LAT_FROM, LOCATION_LAT_TO, 5);
+  const locationLng = getRandomNumber(LOCATION_LNG_FROM, LOCATION_LNG_TO, 5);
+
   return {
     author: {
       avatar: `img/avatars/user${AVATAR_NUMBER.shift()}.png`,
     },
     offer: {
-      title: getRandomArrayElement(TITLES),
+      title: getRandomNumber(0, TITLES.length - 1),
       address: String(`${locationLat}, ${ locationLng}`),
-      price: getRandomPositiveInteger(0, 100000),
-      type: getRandomArrayElement(TYPES),
-      rooms: getRandomPositiveInteger(0, 100),
-      guests: getRandomPositiveInteger(0, 100),
-      checkin: getRandomArrayElement(CHECKIN),
-      checkout: getRandomArrayElement(CHECKOUT),
+      price: getRandomNumber(PRICE_FROM, PRICE_TO, 0),
+      type: getRandomNumber(0, TYPES.length - 1),
+      rooms: getRandomNumber(ROOMS_FROM, ROOMS_TO, 0),
+      guests: getRandomNumber(GUESTS_FROM, GUESTS_TO, 0),
+      checkin: getRandomNumber(0, CHECKIN.length - 1),
+      checkout: getRandomNumber(0, CHECKOUT.length - 1),
       features: getArrayRandomLengthUnique(FEATURES, featuresLength),
-      description: getRandomArrayElement(DESCRIPTIONS),
-      photos: getArrayRandomLengthElement(PHOTOS, photosLength),
+      description: getRandomNumber(0, DESCRIPTIONS.length - 1),
+      photos: getArrayRandomLengthElement(getString(PHOTOS), photosLength),
     },
     location: {
       lat: locationLat,
