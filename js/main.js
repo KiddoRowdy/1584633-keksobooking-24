@@ -76,33 +76,23 @@ const PHOTOS = [
 
 
 const ADVERTISMENT_COUNT = 3;
-
 const FEATURES_FROM = 1;
-
 const FEATURES_TO = 6;
-
+const FEATURES_SIGHNS = 0;
 const PHOTOS_FROM = 1;
-
 const PHOTOS_TO = 3;
-
+const PHOTOS_SIGNS = 0;
 const LOCATION_LAT_FROM = 35.65000;
-
 const LOCATION_LAT_TO = 35.70000;
-
+const LOCATION_LAT_SIGHNS = 5;
 const LOCATION_LNG_FROM = 139.70000;
-
 const LOCATION_LNG_TO = 139.80000;
-
+const LOCATION_LNG_SIGHNS = 5;
 const PRICE_FROM = 0;
-
 const PRICE_TO = 100000;
-
 const ROOMS_FROM = 0;
-
 const ROOMS_TO = 100;
-
 const GUESTS_FROM = 0;
-
 const GUESTS_TO = 100;
 
 const getRandomNumber = (from, to, numberOfSigns) => {
@@ -151,10 +141,10 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
 
 
 const createAdvertisement = () => {
-  const featuresLength = getRandomNumber(FEATURES_FROM, FEATURES_TO, 0);
-  const photosLength = getRandomNumber(PHOTOS_FROM, PHOTOS_TO, 0);
-  const locationLat = getRandomNumber(LOCATION_LAT_FROM, LOCATION_LAT_TO, 5);
-  const locationLng = getRandomNumber(LOCATION_LNG_FROM, LOCATION_LNG_TO, 5);
+  const featuresLength = getRandomNumber(FEATURES_FROM, FEATURES_TO, FEATURES_SIGHNS);
+  const photosLength = getRandomNumber(PHOTOS_FROM, PHOTOS_TO, PHOTOS_SIGNS);
+  const locationLat = getRandomNumber(LOCATION_LAT_FROM, LOCATION_LAT_TO, LOCATION_LAT_SIGHNS);
+  const locationLng = getRandomNumber(LOCATION_LNG_FROM, LOCATION_LNG_TO, LOCATION_LNG_SIGHNS);
 
   return {
     author: {
