@@ -134,5 +134,3 @@ const createAdvertisement = () => {
 const allAdvertisment = Array.from({length:ADVERTISMENT_COUNT}, createAdvertisement);
 
 console.log(allAdvertisment);
-
-export {PHOTOS_PATH};
