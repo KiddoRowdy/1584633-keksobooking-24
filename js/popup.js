@@ -1,18 +1,18 @@
-import {createAdvertisement, FEATURES} from './advertisment.js';
+import {allAdvertisment, FEATURES} from './advertisment.js';
 
 const blockMap = document.querySelector('.map');
 // Блок для вставки копируемых элементов
 const similarElement = blockMap.querySelector('#map-canvas');
 // Шаблон, который мы копируем
-const similarMapTemplate = document.querySelector('#card')
+const similarCardTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const similarAdvertisment = createAdvertisement();
+const similarAdvertisment = allAdvertisment;
 
 similarAdvertisment.forEach((offerResult) => {
   // Копирую шаблон
-  const advertismentElement = similarMapTemplate.cloneNode(true);
+  const advertismentElement = similarCardTemplate.cloneNode(true);
   // Части объявления
   advertismentElement.querySelector('.popup__title').textContent = offerResult.offer.title;
   advertismentElement.querySelector('.popup__text--address').textContent = offerResult.offer.adress;
@@ -41,3 +41,5 @@ featureList.forEach((featureListItem) => {
     featureListItem.remove();
   }
 });
+
+export {similarAdvertisment, featureList};

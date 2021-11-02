@@ -135,4 +135,4 @@ const allAdvertisment = Array.from({length:ADVERTISMENT_COUNT}, createAdvertisem
 
 console.log(allAdvertisment);
 
-export {createAdvertisement, FEATURES};
+export {createAdvertisement, FEATURES, allAdvertisment};

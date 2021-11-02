@@ -37,4 +37,4 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
   return dellElements = newElements;
 };
 
-export {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement};
+export default {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement};
