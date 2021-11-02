@@ -7,6 +7,11 @@ const getRandomNumber = (from, to, numberOfSigns) => {
   return Number(calculation);
 };
 
+function getRandomString(element) {
+  const someString = Math.floor(Math.random() * element.length);
+  return element[someString];
+}
+
 const getArrayRandomLengthUnique = (elements, arrayLength) => {
   let index = 0;
   let dellElements = elements.slice();
@@ -37,4 +42,4 @@ const getArrayRandomLengthElement = (elements, arrayLength) => {
   return dellElements = newElements;
 };
 
-export default {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement};
+export {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement, getRandomString};

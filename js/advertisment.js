@@ -1,4 +1,4 @@
-import {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement} from './data.js';
+import {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement, getRandomString} from './data.js';
 
 const AVATAR_NUMBER = [
   '01',
@@ -112,16 +112,16 @@ const createAdvertisement = () => {
       avatar: `img/avatars/user${AVATAR_NUMBER.shift()}.png`,
     },
     offer: {
-      title: getRandomNumber(0, TITLES.length - 1),
+      title: getRandomString(TITLES),
       address: String(`${locationLat}, ${ locationLng}`),
       price: getRandomNumber(PRICE_FROM, PRICE_TO, 0),
-      type: getRandomNumber(0, TYPES.length - 1),
+      type: getRandomString(TYPES),
       rooms: getRandomNumber(ROOMS_FROM, ROOMS_TO, 0),
       guests: getRandomNumber(GUESTS_FROM, GUESTS_TO, 0),
-      checkin: getRandomNumber(0, CHECKIN.length - 1),
-      checkout: getRandomNumber(0, CHECKOUT.length - 1),
+      checkin: getRandomString(CHECKIN),
+      checkout: getRandomString(CHECKOUT),
       features: getArrayRandomLengthUnique(FEATURES, featuresLength),
-      description: getRandomNumber(0, DESCRIPTIONS.length - 1),
+      description: getRandomString(DESCRIPTIONS),
       photos: getArrayRandomLengthElement(getString(PHOTOS), photosLength),
     },
     location: {
@@ -132,7 +132,5 @@ const createAdvertisement = () => {
 };
 
 const allAdvertisment = Array.from({length:ADVERTISMENT_COUNT}, createAdvertisement);
-
-console.log(allAdvertisment);
 
 export {createAdvertisement, FEATURES, allAdvertisment};
