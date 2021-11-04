@@ -76,7 +76,7 @@ const PHOTOS = [
   'claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-const ADVERTISMENT_COUNT = 3;
+const ADVERTISMENT_COUNT = 1;
 const FEATURES_FROM = 1;
 const FEATURES_TO = 6;
 const FEATURES_SIGHNS = 0;
@@ -122,7 +122,7 @@ const createAdvertisement = () => {
       checkout: getRandomString(CHECKOUT),
       features: getArrayRandomLengthUnique(FEATURES, featuresLength),
       description: getRandomString(DESCRIPTIONS),
-      photos: getArrayRandomLengthElement(getString(PHOTOS), photosLength),
+      photos: getArrayRandomLengthElement(getString(PHOTOS.shift()), photosLength),
     },
     location: {
       lat: locationLat,

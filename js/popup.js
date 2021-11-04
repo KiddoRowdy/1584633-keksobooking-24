@@ -20,9 +20,8 @@ similarAdvertisment.forEach((offerResult) => {
   advertismentElement.querySelector('.popup__type').textContent = offerResult.offer.type;
   advertismentElement.querySelector('.popup__text--capacity').textContent = `${offerResult.offer.rooms} комнаты для ${offerResult.offer.guests} гостей`;
   advertismentElement.querySelector('.popup__text--time').textContent = `Заезд после ${offerResult.offer.checkin}, выезд до ${offerResult.offer.checkout}`;
-  advertismentElement.querySelector('.popup__features').textContent = offerResult.offer.features;
   advertismentElement.querySelector('.popup__description').textContent = offerResult.offer.description;
-  advertismentElement.querySelector('.popup__photos').textContent = offerResult.offer.photos;
+  advertismentElement.querySelector('.popup__photos').src = offerResult.offer.photos;
   advertismentElement.querySelector('.popup__avatar').src = offerResult.author.avatar;
   similarElement.appendChild(advertismentElement);
 });
