@@ -44,6 +44,6 @@ function checkHouseType(element) {
   if (element === 'hotel') {
     return 'Отель';
   }
-};
+}
 
 export {getRandomNumber, getRandomString, getRandomArray, checkHouseType};
