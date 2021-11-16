@@ -1,4 +1,4 @@
-import {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement, getRandomString} from './data.js';
+import {getRandomNumber, getRandomString, getRandomArray, checkHouseType} from './data.js';
 
 const AVATAR_NUMBER = [
   '01',
@@ -80,9 +80,11 @@ const ADVERTISMENT_COUNT = 1;
 const FEATURES_FROM = 1;
 const FEATURES_TO = 6;
 const FEATURES_SIGHNS = 0;
+const featuresLength = getRandomNumber(FEATURES_FROM, FEATURES_TO, FEATURES_SIGHNS);
 const PHOTOS_FROM = 1;
 const PHOTOS_TO = 3;
 const PHOTOS_SIGNS = 0;
+const photosLength = getRandomNumber(PHOTOS_FROM, PHOTOS_TO, PHOTOS_SIGNS);
 const LOCATION_LAT_FROM = 35.65000;
 const LOCATION_LAT_TO = 35.70000;
 const LOCATION_LAT_SIGHNS = 5;
@@ -96,33 +98,45 @@ const ROOMS_TO = 100;
 const GUESTS_FROM = 0;
 const GUESTS_TO = 100;
 
-function getString(someString) {
+/*function getString(someString) {
 
   return `${PHOTOS_PATH}${someString}`;
 }
+*/
+
+const getRandomArrayPhotos = getRandomArray(PHOTOS, photosLength);
+
+const photosElements = getRandomArrayPhotos.map( (item) =>
+  `${PHOTOS_PATH}${item}`,
+);
+
+/*const onePhoto = photosElements.forEach( (arrayItem) => {
+  const popupPhotos = item.querySelector('.popup__photos');
+  popupPhotos.insertAdjacentHTML('beforeend', arrayItem);
+});*/
 
 const createAdvertisement = () => {
-  const featuresLength = getRandomNumber(FEATURES_FROM, FEATURES_TO, FEATURES_SIGHNS);
-  const photosLength = getRandomNumber(PHOTOS_FROM, PHOTOS_TO, PHOTOS_SIGNS);
   const locationLat = getRandomNumber(LOCATION_LAT_FROM, LOCATION_LAT_TO, LOCATION_LAT_SIGHNS);
   const locationLng = getRandomNumber(LOCATION_LNG_FROM, LOCATION_LNG_TO, LOCATION_LNG_SIGHNS);
 
   return {
     author: {
-      avatar: `img/avatars/user${AVATAR_NUMBER.shift()}.png`,
+      avatar: `img/avatars/user${getRandomString(AVATAR_NUMBER)}.png`,
     },
     offer: {
       title: getRandomString(TITLES),
-      address: String(`${locationLat}, ${ locationLng}`),
+      address: String(`${locationLat} ${ locationLng}`),
       price: getRandomNumber(PRICE_FROM, PRICE_TO, 0),
-      type: getRandomString(TYPES),
+      type: checkHouseType(getRandomString(TYPES)),
       rooms: getRandomNumber(ROOMS_FROM, ROOMS_TO, 0),
       guests: getRandomNumber(GUESTS_FROM, GUESTS_TO, 0),
       checkin: getRandomString(CHECKIN),
       checkout: getRandomString(CHECKOUT),
-      features: getArrayRandomLengthUnique(FEATURES, featuresLength),
+      //features: finalArrayFeatures,
+      features: getRandomArray(FEATURES, featuresLength),
       description: getRandomString(DESCRIPTIONS),
-      photos: getArrayRandomLengthElement(getString(PHOTOS.shift()), photosLength),
+      //photos: `https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/${getRandomString(PHOTOS)}`,
+      photos:photosElements,
     },
     location: {
       lat: locationLat,
@@ -133,4 +147,4 @@ const createAdvertisement = () => {
 
 const allAdvertisment = Array.from({length:ADVERTISMENT_COUNT}, createAdvertisement);
 
-export {createAdvertisement, FEATURES, allAdvertisment};
+export {createAdvertisement, FEATURES, PHOTOS, PHOTOS_PATH, allAdvertisment, photosElements, photosLength, featuresLength};

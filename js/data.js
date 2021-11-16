@@ -12,34 +12,38 @@ function getRandomString(element) {
   return element[someString];
 }
 
-const getArrayRandomLengthUnique = (elements, arrayLength) => {
-  let index = 0;
-  let dellElements = elements.slice();
-  const newElements = [];
+function getRandomArray(element) {
+  const maxLength = element.length;
+  const lengthOfArray = getRandomNumber(1, maxLength);
+  const array = [];
 
-  do {
-    const newElement = (dellElements[getRandomNumber]);
-    newElements.push(newElement);
-    const indexElements = dellElements.indexOf(newElement);
-    dellElements.splice(indexElements, 1);
-    index++;
-  } while (index < arrayLength);
+  while (array.length < lengthOfArray) {
+    const indexOfEl = getRandomNumber(0, maxLength - 1);
+    const el = element[indexOfEl];
 
-  return dellElements = newElements;
+    if (!array.includes(el)) {
+      array.push(el);
+    }
+  }
+  return array;
+}
+
+function checkHouseType(element) {
+  if (element === 'flat') {
+    return 'Квартира';
+  }
+  if (element === 'bungalow') {
+    return 'Бунгало';
+  }
+  if (element === 'palace') {
+    return 'Дворец';
+  }
+  if (element === 'house') {
+    return 'Дом';
+  }
+  if (element === 'hotel') {
+    return 'Отель';
+  }
 };
 
-const getArrayRandomLengthElement = (elements, arrayLength) => {
-  let index = 0;
-  let dellElements = elements.slice();
-  const newElements = [];
-
-  do {
-    const newElement = (dellElements[getRandomNumber]);
-    newElements.push(newElement);
-    index++;
-  } while (index < arrayLength);
-
-  return dellElements = newElements;
-};
-
-export {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement, getRandomString};
+export {getRandomNumber, getRandomString, getRandomArray, checkHouseType};

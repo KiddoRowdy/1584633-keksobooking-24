@@ -1,44 +1,80 @@
-import {allAdvertisment, FEATURES} from './advertisment.js';
+import {allAdvertisment, FEATURES, featuresLength, photosElements} from './advertisment.js';
+import {getRandomArray} from './data.js';
 
 const blockMap = document.querySelector('.map');
 // Блок для вставки копируемых элементов
 const similarElement = blockMap.querySelector('#map-canvas');
 // Шаблон, который мы копируем
-const similarCardTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
+const similarCardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const similarAdvertisment = allAdvertisment;
+const offerResult = allAdvertisment;
 
-similarAdvertisment.forEach((offerResult) => {
+const getPopupElement = (offer) => {
   // Копирую шаблон
   const advertismentElement = similarCardTemplate.cloneNode(true);
+  const featuresContainer = advertismentElement.querySelector('.popup__features');
+  const featureList = featuresContainer.querySelectorAll('.popup__feature');
+  const features = getRandomArray(FEATURES, featuresLength);
+  const photoContainer = advertismentElement.querySelector('.popup__photos');
   // Части объявления
-  advertismentElement.querySelector('.popup__title').textContent = offerResult.offer.title;
-  advertismentElement.querySelector('.popup__text--address').textContent = offerResult.offer.adress;
-  advertismentElement.querySelector('.popup__text--price').textContent = offerResult.offer.price;
-  advertismentElement.querySelector('.popup__type').textContent = offerResult.offer.type;
-  advertismentElement.querySelector('.popup__text--capacity').textContent = `${offerResult.offer.rooms} комнаты для ${offerResult.offer.guests} гостей`;
-  advertismentElement.querySelector('.popup__text--time').textContent = `Заезд после ${offerResult.offer.checkin}, выезд до ${offerResult.offer.checkout}`;
-  advertismentElement.querySelector('.popup__description').textContent = offerResult.offer.description;
-  advertismentElement.querySelector('.popup__photos').src = offerResult.offer.photos;
-  advertismentElement.querySelector('.popup__avatar').src = offerResult.author.avatar;
-  similarElement.appendChild(advertismentElement);
-});
+  advertismentElement.querySelector('.popup__title').textContent = offer.offer.title;
+  advertismentElement.querySelector('.popup__text--address').textContent = offer.offer.address;
+  advertismentElement.querySelector('.popup__text--price').textContent = offer.offer.price;
+  advertismentElement.querySelector('.popup__type').textContent = offer.offer.type;
+  advertismentElement.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms} комнаты для ${offer.offer.guests} гостей`;
+  advertismentElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.offer.checkin}, выезд до ${offer.offer.checkout}`;
+  //advertismentElement.querySelector('.popup__features').textContent = offerResult.offer.features;
+  advertismentElement.querySelector('.popup__description').textContent = offer.offer.description;
+  //advertismentElement.querySelector('.popup__photo').src = offerResult.offer.photos;
+  advertismentElement.querySelector('.popup__avatar').src = offer.author.avatar;
 
-const featuresContainer = document.querySelector('.popup__features');
-const featureList = featuresContainer.querySelectorAll('.popup__feature');
+  featureList.forEach((featureListItem) => {
+    //Проверяю каждый пункт ul на существование модификатора
+    // isNecessary - нужен ли пункт списка
+    const isNecessary = features.some(
+      (popupFeature) => featureListItem.classList.contains(`popup__feature--${popupFeature}`),
+    );
+    //если не нашел ни одного модификатора, пункт удаляется
+    if (!isNecessary) {
+      featureListItem.remove();
+    }
+  });
 
-featureList.forEach((featureListItem) => {
+  photoContainer.innerHTML = '';
+
+  photosElements.forEach((popupPhoto) => {
+    const photoListItem = `<img src="${popupPhoto}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`;
+    photoContainer.insertAdjacentHTML('beforeend', photoListItem);
+  });
+
+  //console.log(offer);
+
+  return advertismentElement;
+};
+
+const createPopupELement = getPopupElement(offerResult[0]);
+
+//console.log(getPopupElement(offerResult));
+
+similarElement.appendChild(createPopupELement);
+
+
+/*
+photoList.forEach((photoListItem) => {
   //Проверяю каждый пункт ul на существование модификатора
   // isNecessary - нужен ли пункт списка
-  const isNecessary = FEATURES.some(
-    (popupFeature) => featureListItem.classList.contains(`popup__feature--${ popupFeature}`),
+  const isNecessary = PHOTOS.some(
+    (popupPhoto) => photoListItem.classList.contains(`popup__photo${ popupPhoto}`),
   );
     //если не нашел ни одного модификатора, пункт удаляется
   if (!isNecessary) {
-    featureListItem.remove();
+    photoListItem.remove();
   }
 });
+*/
 
-export {similarAdvertisment, featureList};
+/*
+// Шаблон features, который копирую
+const similarFeatures = document.querySelector('.popup').content.querySelector('.popup__features');
+const featuresElement = similarFeatures.cloneNode(true);
+filterContainer.appendChild(featuresElement);*/
