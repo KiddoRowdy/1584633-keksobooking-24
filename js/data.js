@@ -7,34 +7,43 @@ const getRandomNumber = (from, to, numberOfSigns) => {
   return Number(calculation);
 };
 
-const getArrayRandomLengthUnique = (elements, arrayLength) => {
-  let index = 0;
-  let dellElements = elements.slice();
-  const newElements = [];
+function getRandomString(element) {
+  const someString = Math.floor(Math.random() * element.length);
+  return element[someString];
+}
 
-  do {
-    const newElement = (dellElements[getRandomNumber]);
-    newElements.push(newElement);
-    const indexElements = dellElements.indexOf(newElement);
-    dellElements.splice(indexElements, 1);
-    index++;
-  } while (index < arrayLength);
+function getRandomArray(element) {
+  const maxLength = element.length;
+  const lengthOfArray = getRandomNumber(1, maxLength);
+  const array = [];
 
-  return dellElements = newElements;
-};
+  while (array.length < lengthOfArray) {
+    const indexOfEl = getRandomNumber(0, maxLength - 1);
+    const el = element[indexOfEl];
 
-const getArrayRandomLengthElement = (elements, arrayLength) => {
-  let index = 0;
-  let dellElements = elements.slice();
-  const newElements = [];
+    if (!array.includes(el)) {
+      array.push(el);
+    }
+  }
+  return array;
+}
 
-  do {
-    const newElement = (dellElements[getRandomNumber]);
-    newElements.push(newElement);
-    index++;
-  } while (index < arrayLength);
+function checkHouseType(element) {
+  if (element === 'flat') {
+    return 'Квартира';
+  }
+  if (element === 'bungalow') {
+    return 'Бунгало';
+  }
+  if (element === 'palace') {
+    return 'Дворец';
+  }
+  if (element === 'house') {
+    return 'Дом';
+  }
+  if (element === 'hotel') {
+    return 'Отель';
+  }
+}
 
-  return dellElements = newElements;
-};
-
-export {getRandomNumber, getArrayRandomLengthUnique, getArrayRandomLengthElement};
+export {getRandomNumber, getRandomString, getRandomArray, checkHouseType};
