@@ -98,22 +98,11 @@ const ROOMS_TO = 100;
 const GUESTS_FROM = 0;
 const GUESTS_TO = 100;
 
-/*function getString(someString) {
-
-  return `${PHOTOS_PATH}${someString}`;
-}
-*/
-
 const getRandomArrayPhotos = getRandomArray(PHOTOS, photosLength);
 
 const photosElements = getRandomArrayPhotos.map( (item) =>
   `${PHOTOS_PATH}${item}`,
 );
-
-/*const onePhoto = photosElements.forEach( (arrayItem) => {
-  const popupPhotos = item.querySelector('.popup__photos');
-  popupPhotos.insertAdjacentHTML('beforeend', arrayItem);
-});*/
 
 const createAdvertisement = () => {
   const locationLat = getRandomNumber(LOCATION_LAT_FROM, LOCATION_LAT_TO, LOCATION_LAT_SIGHNS);
@@ -132,10 +121,8 @@ const createAdvertisement = () => {
       guests: getRandomNumber(GUESTS_FROM, GUESTS_TO, 0),
       checkin: getRandomString(CHECKIN),
       checkout: getRandomString(CHECKOUT),
-      //features: finalArrayFeatures,
       features: getRandomArray(FEATURES, featuresLength),
       description: getRandomString(DESCRIPTIONS),
-      //photos: `https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/${getRandomString(PHOTOS)}`,
       photos:photosElements,
     },
     location: {
